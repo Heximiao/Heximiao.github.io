@@ -2,7 +2,7 @@ name: Deploy Astro site to Pages
 
 on:
   push:
-    branches: [ master ] # 匹配你的 master 分支
+    branches: [ main ] # 匹配你的 master 分支
   workflow_dispatch: # 允许你手动点击运行
 
 permissions:
