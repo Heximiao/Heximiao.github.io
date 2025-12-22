@@ -136,7 +136,7 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true, // 在主页显示自定义文本
-			title: "个性签名", // 主页横幅主标题
+			title: "群u的个性签名", // 主页横幅主标题
 
 			subtitle: [
 				"不是因为你的能力，而是因为你的选择 ——何夕",
@@ -277,12 +277,6 @@ export const navBarConfig: NavBarConfig = {
 					name: "Gallery",
 					url: "/albums/",
 					icon: "material-symbols:photo-library",
-				},
-				{
-					name: "Devices",
-					url: "devices/",
-					icon: "material-symbols:devices",
-					external: false,
 				},
 			],
 		},

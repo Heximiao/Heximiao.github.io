@@ -1,0 +1,10 @@
+{
+    "title": "日本巡礼照片",
+    "hidden": false,
+    "description": "旅行的照片",
+    "date": "2025-09-29",
+    "location": "camera",
+    "tags": ["旅行", "圣地巡礼", "日本"],
+    "layout": "masonry",
+    "columns": 3
+}

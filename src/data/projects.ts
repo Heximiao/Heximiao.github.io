@@ -37,22 +37,37 @@ export const projectsData: Project[] = [
 		tags: ["Nonebot2", "A-SOUL", "Plugin"],
 	},
 	{
-		id: "portfolio-website",
-		title: "Personal Portfolio",
-		description:
-			"Personal portfolio website showcasing project experience and technical skills.",
-		image: "",
-		category: "web",
-		techStack: ["React", "Next.js", "TypeScript", "Framer Motion"],
-		status: "completed",
-		liveDemo: "https://portfolio.example.com",
-		sourceCode: "https://github.com/example/portfolio",
-		visitUrl: "https://portfolio.example.com", // 添加前往项目链接
-		startDate: "2023-09-01",
-		endDate: "2023-12-01",
-		featured: true,
-		tags: ["Portfolio", "React", "Animation"],
-	},
+        id: "astrbot-analysis",
+        title: "AstrBot QQ 群日报分析",
+        description:
+            "参与开发的 AstrBot 插件，实现对 QQ 群聊消息的每日自动化汇总与 AI 深度分析，生成可视化日报。",
+        image: "https://opengraph.githubassets.com/1/SXP-Simon/astrbot-qq-group-daily-analysis",
+        category: "other",
+        techStack: ["Python", "AstrBot", "LLM"],
+        status: "completed",
+        liveDemo: "https://github.com/SXP-Simon/astrbot-qq-group-daily-analysis",
+        sourceCode: "https://github.com/SXP-Simon/astrbot-qq-group-daily-analysis",
+        visitUrl: "https://github.com/SXP-Simon/astrbot-qq-group-daily-analysis",
+        startDate: "2024-11-01", 
+        featured: true,
+        tags: ["AI", "Plugin", "Data Analysis"],
+    },
+    {
+        id: "maibot-plugin-repo",
+        title: "Mai-with-u Plugin Repo",
+        description:
+            "参与维护的麦麦 bot 插件库，汇集了多种为社区打造的功能增强插件。",
+        image: "https://opengraph.githubassets.com/1/Mai-with-u/plugin-repo",
+        category: "other",
+        techStack: ["Python", "Nonebot2", "Community"],
+        status: "in-progress",
+        liveDemo: "https://github.com/Mai-with-u/plugin-repo",
+        sourceCode: "https://github.com/Mai-with-u/plugin-repo",
+        visitUrl: "https://github.com/Mai-with-u/plugin-repo",
+        startDate: "2025-01-01",
+        featured: true,
+        tags: ["Nonebot2", "Open Source", "Maintenance"],
+    },
 ];
 
 // Get project statistics
