@@ -1,0 +1,64 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { scanGalgames } from "../../utils/galgame-scanner";
+
+export async function getStaticPaths() {
+  const games = await scanGalgames();
+  return games.map((game) => ({
+    params: { id: game.id },
+    props: { game },
+  }));
+}
+
+const { game } = Astro.props as any;
+const Content = game.Content; 
+---
+
+<MainGridLayout title={game.data.title} description={game.data.description}>
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      
+      <div class="mb-6">
+        <a href="/galgame/" class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-[var(--primary)] transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          返回列表
+        </a>
+      </div>
+
+      <header class="mb-10 flex flex-col md:flex-row gap-8 items-start">
+        <div class="w-full md:w-52 shrink-0">
+          <img src={game.data.cover} class="w-full rounded-lg shadow-lg border dark:border-neutral-800" />
+        </div>
+        <div class="flex-1">
+          <h1 class="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">{game.data.title}</h1>
+          <div class="space-y-2 text-sm text-neutral-500 dark:text-neutral-400 font-medium">
+            <p>制作商：<span class="text-neutral-800 dark:text-neutral-200">{game.data.developer}</span></p>
+            <p>评分：<span class="text-yellow-500 font-bold text-lg">★ {game.data.rating}</span></p>
+            <p>日期：{new Date(game.data.releaseDate).toLocaleDateString('zh-CN')}</p>
+            <div class="flex gap-2 pt-2">
+              {game.data.tags.map((tag: string) => (
+                <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px]">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <article class="prose dark:prose-invert max-w-none border-t border-neutral-100 dark:border-neutral-800 pt-10">
+        <Content />
+      </article>
+
+    </div>
+  </div>
+</MainGridLayout>
+
+<style is:global>
+  /* 确保 Markdown 里的引用块在 Mizuki 下美观 */
+  .prose blockquote {
+    border-left: 4px solid var(--primary) !important;
+    background: rgba(var(--primary-rgb), 0.05);
+    padding: 1rem 1.5rem !important;
+    font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+</style>

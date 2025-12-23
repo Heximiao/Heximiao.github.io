@@ -45,6 +45,7 @@ export const siteConfig: SiteConfig = {
 		timeline: true, // 时间线页面开关
 		albums: true, // 相册页面开关
 		devices: false, // 设备页面开关
+		//galgame: true,
 	},
 
 	// 顶栏标题配置
@@ -277,6 +278,11 @@ export const navBarConfig: NavBarConfig = {
 					name: "Gallery",
 					url: "/albums/",
 					icon: "material-symbols:photo-library",
+				},
+				{
+					name: "Galgame",
+					url: "/galgame/", // 确保你的路由里有这个路径
+					icon: "material-symbols:videogame-asset",
 				},
 			],
 		},

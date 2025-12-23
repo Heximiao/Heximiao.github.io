@@ -27,7 +27,7 @@ export const skillsData: Skill[] = [
         icon: "simple-icons:stmicroelectronics", // 意法半导体图标
         category: "backend",
         level: "advanced",
-        experience: { years: 1, months: 6 },
+        experience: { years: 1, months: 0 },
         projects: ["bionic-butterfly-control", "uav-fc-system"],
         color: "#03234B",
     },
@@ -35,11 +35,11 @@ export const skillsData: Skill[] = [
         id: "embedded-c",
         name: "Embedded C",
         description:
-            "精通底层 C 语言开发，熟悉寄存器操作、内存映射及实时操作系统 (RTOS) 的基本原理。",
+            "熟悉底层 C 语言开发，熟悉寄存器操作、内存映射的基本原理。参加过ACM校赛",
         icon: "logos:c",
         category: "backend",
         level: "advanced",
-        experience: { years: 2, months: 0 },
+        experience: { years: 1, months: 6 },
         color: "#A8B9CC",
     },
     {
@@ -59,24 +59,13 @@ export const skillsData: Skill[] = [
         id: "python",
         name: "Python / Bot",
         description:
-            "熟练应用异步编程处理并发，精通 Nonebot2 框架。在 maibot 与 Astrbot 项目中有丰富的插件架构与 API 对接经验。",
+            "熟练应用异步编程处理并发，熟悉 Nonebot2 框架。在 maibot 与 Astrbot 项目中有丰富的插件架构与 API 对接经验。",
         icon: "logos:python",
         category: "backend",
         level: "advanced",
         experience: { years: 1, months: 10 },
         projects: ["acpoke_plugin", "maibot-plugins"],
         color: "#3776AB",
-    },
-    {
-        id: "cpp",
-        name: "C++ (ACM)",
-        description:
-            "ACM 赛训背景，具备扎实的数据结构与算法功底。擅长逻辑分析与代码性能优化。",
-        icon: "logos:c-plusplus",
-        category: "backend",
-        level: "intermediate",
-        experience: { years: 2, months: 0 },
-        color: "#00599C",
     },
 
     // 效率工具 (Tools)

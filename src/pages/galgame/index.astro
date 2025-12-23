@@ -1,0 +1,45 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { scanGalgames } from "../../utils/galgame-scanner";
+import { Icon } from "astro-icon/components";
+
+const galgames = await scanGalgames();
+
+const statusConfig: any = {
+  completed: { label: "已通关", color: "text-green-500 bg-green-500/10" },
+  playing: { label: "攻略中", color: "text-blue-500 bg-blue-500/10" },
+  onhold: { label: "搁置中", color: "text-yellow-500 bg-yellow-500/10" },
+};
+---
+
+<MainGridLayout title="Galgame 收藏" description="游玩记录与简评">
+  <div class="card-base px-9 py-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-3">
+        <Icon name="material-symbols:videogame-asset" class="text-[var(--primary)]" />
+        Galgame 库
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400">记录那些触动心灵的暑假。</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {galgames.map((game) => (
+        <a href={`/galgame/${game.id}/`} class="group card-base border border-neutral-200 dark:border-neutral-800 overflow-hidden hover:border-[var(--primary)] transition-all duration-300">
+          <div class="aspect-[16/9] overflow-hidden">
+            <img src={game.data.cover} alt={game.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" />
+          </div>
+          <div class="p-4">
+            <h2 class="font-bold text-lg group-hover:text-[var(--primary)] transition-colors">{game.data.title}</h2>
+            <div class="flex items-center gap-2 mt-1">
+               <span class={`text-[10px] px-2 py-0.5 rounded font-bold ${statusConfig[game.data.status]?.color || 'bg-gray-100'}`}>
+                {statusConfig[game.data.status]?.label || "未知"}
+              </span>
+              <span class="text-[10px] text-neutral-400 tracking-widest">{game.data.developer}</span>
+            </div>
+            <p class="text-sm text-neutral-500 mt-3 line-clamp-2 italic">"{game.data.description}"</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</MainGridLayout>

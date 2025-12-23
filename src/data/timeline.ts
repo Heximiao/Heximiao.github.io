@@ -30,7 +30,7 @@ export const timelineData: TimelineItem[] = [
         description:
             "主修电子信息工程，深入学习电路分析、信号处理及嵌入式系统开发。目前专注于 STM32 系列芯片的应用与开发。",
         type: "education",
-        startDate: "2023-09-01", // 请根据你的实际入学年份修改
+        startDate: "2024-09-01", // 请根据你的实际入学年份修改
         location: "福建·漳州",
         organization: "厦门大学嘉庚学院",
         skills: ["C/C++", "STM32", "电路设计", "嵌入式开发"],
@@ -49,7 +49,7 @@ export const timelineData: TimelineItem[] = [
         description:
             "负责协会日常技术管理与活动组织，带领成员研究无人机飞行控制系统及开源硬件开发。",
         type: "work",
-        startDate: "2024-03-01",
+        startDate: "2025-10-23",
         organization: "无人机协会",
         position: "副会长",
         skills: ["团队管理", "无人机技术", "项目统筹"],
@@ -64,17 +64,16 @@ export const timelineData: TimelineItem[] = [
     },
     {
         id: "robot-contest-2024",
-        title: "全国大学生机器人大赛 (机创赛)",
+        title: "全国大学生机械创新大赛 (机创赛)",
         description:
             "参与“仿生蝴蝶”赛道，负责仿生结构的嵌入式控制系统开发，实现高精度动作模拟。",
         type: "project",
-        startDate: "2024-09-01",
+        startDate: "2025-11-01",
         organization: "机创赛项目组",
         position: "控制算法/嵌入式开发",
-        skills: ["STM32", "舵机控制", "仿生算法", "传感器融合"],
+        skills: ["STM32", "电机控制", "仿生算法"],
         achievements: [
             "自主设计基于 STM32 的蝴蝶翅膀振动控制逻辑",
-            "优化仿生动作的平滑度，提高模拟真实度",
             "解决轻量化结构下的电源管理难题"
         ],
         icon: "material-symbols:precision-manufacturing",
@@ -86,12 +85,12 @@ export const timelineData: TimelineItem[] = [
         title: "maibot 项目组插件开发",
         description:
             "作为 maibot 项目组成员，利用 Python 开发多款实用插件，提升社区用户交互体验。",
-        type: "project",
-        startDate: "2023-12-01",
+        type: "work",
+        startDate: "2025-05-17",
         organization: "maibot 开源社区",
         skills: ["Python", "Nonebot2", "API 集成"],
         achievements: [
-            "开发并维护多款高频使用插件",
+            "开发并维护多款高频使用插件，例如戳一戳插件广受人喜爱",
             "优化插件异步处理逻辑，降低延迟",
             "目前正参与 Astrbot 的前沿研究与适配"
         ],
@@ -104,11 +103,12 @@ export const timelineData: TimelineItem[] = [
         description:
             "参加校级算法竞赛，磨炼基础算法逻辑与 C/C++ 编程能力。",
         type: "achievement",
-        startDate: "2023-11-01",
-        organization: "计算机学院",
+        startDate: "2025-04-01",
+        endDate: "2025-05-20",
+        organization: "信息科学与技术学院",
         skills: ["C++", "数据结构", "算法分析"],
         achievements: [
-            "在规定时间内完成多道算法题目",
+            "在规定时间内完成算法题目",
             "提升了逻辑严密性与代码运行效率"
         ],
         icon: "material-symbols:emoji-events",

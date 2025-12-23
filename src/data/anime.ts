@@ -81,22 +81,6 @@ const localAnimeList: AnimeItem[] = [
 		startDate: "2014-04",
 		endDate: "2014-06",
 	},
-	{
-		title: "The Secret of the Magic Girl",
-		status: "watching",
-		rating: 9.0,
-		cover: "/assets/anime/cmmn.webp",
-		description: "Muli, Muli!",
-		episodes: "12 episodes",
-		year: "2024",
-		genre: ["Daily life", "Healing", "Magic"],
-		studio: "C2C",
-		link: "https://www.bilibili.com/bangumi/media/md26625039",
-		progress: 8,
-		totalEpisodes: 12,
-		startDate: "2025-07",
-		endDate: "2025-10",
-	},
 ];
 
 export default localAnimeList;
