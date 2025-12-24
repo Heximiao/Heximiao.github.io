@@ -181,6 +181,14 @@ if (siteConfig.font) {
 	data-overlayscrollbars-initialize
 >
 	<head>
+		<script is:inline>
+        	window.BANNER_HEIGHT = 400; 
+        	window.widgetManager = window.widgetManager || {
+            	getBreakpoints: () => ({ mobile: 768, tablet: 1024 }),
+            	shouldShowSidebar: () => true
+        	};
+    	</script>
+		
 		<!-- 第三方分析脚本 - 延迟加载优化 -->
 		<script is:inline>
 			// 使用 requestIdleCallback 延迟加载第三方脚本
