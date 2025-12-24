@@ -1,6 +1,6 @@
 ---
 title: "时隔五年的仲夏之梦：Summer Pockets 圣地巡礼实录"
-published: 2025-10-18
+published: 2025-12-24
 description: "从初中到大学，跨越五年的等待，我终于站在了直岛与男木岛的土地上，探寻那最初让我入坑的夏天。"
 image: "/images/article/MVIMG_20251001_140245.jpg"
 tags: ["圣地巡礼", "Summer Pockets", "日本旅游", "直岛", "男木岛", "二次元", "galgame"]
