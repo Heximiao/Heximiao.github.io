@@ -1,8 +1,8 @@
 ---
 title: "Summer Pockets"
 developer: "Key"
-releaseDate: 2025-07-20
-cover: "/images/galgame_picture/sp.jpg"
+releaseDate: 2020-07-20
+cover: "/images/galgame_picture/summer_pockets_package_image.webp"
 rating: 9.5
 status: "completed"
 tags: ["岛阁", "治愈", "泣系"]
@@ -17,4 +17,4 @@ description: "在那个暑假，我与少女们相遇了。"
 ### 画面与音乐
 折户伸治的音乐依旧是神中神，配合鸟白岛的夏天氛围，代入感极强。
 
-> "如果可以，我想永远留在那个暑假。"
+> 如果可以，我想永远留在那个暑假。

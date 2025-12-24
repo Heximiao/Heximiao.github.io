@@ -21,7 +21,7 @@ import { LinkPreset } from "./types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 export const siteConfig: SiteConfig = {
-	title: "何夕喵",
+	title: "主页",
 	subtitle: "何夕的个人博客",
 	siteURL: "https://blog.heximiao.com/", // 请替换为你的站点URL，以斜杠结尾
 	siteStartDate: "2025-12-22", // 站点开始运行日期，用于站点统计组件计算运行天数
@@ -241,6 +241,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		// 支持自定义导航栏链接,并且支持多级菜单,3.1版本新加
 		{
+			name: "Galgame",
+			url: "/galgame/", // 确保你的路由里有这个路径
+			icon: "material-symbols:videogame-asset",
+		},
+		{
 			name: "Links",
 			url: "/links/",
 			icon: "material-symbols:link",
@@ -279,11 +284,7 @@ export const navBarConfig: NavBarConfig = {
 					url: "/albums/",
 					icon: "material-symbols:photo-library",
 				},
-				{
-					name: "Galgame",
-					url: "/galgame/", // 确保你的路由里有这个路径
-					icon: "material-symbols:videogame-asset",
-				},
+
 			],
 		},
 		{
