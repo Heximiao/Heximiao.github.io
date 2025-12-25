@@ -34,7 +34,7 @@ const Content = game.Content;
           <div class="space-y-2 text-sm text-neutral-500 dark:text-neutral-400 font-medium">
             <p>制作商：<span class="text-neutral-800 dark:text-neutral-200">{game.data.developer}</span></p>
             <p>评分：<span class="text-yellow-500 font-bold text-lg">★ {game.data.rating}</span></p>
-            <p>日期：{new Date(game.data.releaseDate).toLocaleDateString('zh-CN')}</p>
+            <p>游玩日期：{new Date(game.data.releaseDate).toLocaleDateString('zh-CN')}</p>
             <div class="flex gap-2 pt-2">
               {game.data.tags.map((tag: string) => (
                 <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px]">{tag}</span>
