@@ -1,0 +1,25 @@
+{
+    "version": "1.0.0",
+    "model": "Moc_0.moc3",
+    "textures": [
+        "textures/Textures_0_0.png",
+        "textures/Textures_1_0.png",
+        "textures/Textures_2_0.png",
+        "textures/Textures_3_0.png",
+        "textures/Textures_4_0.png"
+    ],
+    "physics": "Physics_0.json",
+    "motions": {
+        "idle": [
+            { "file": "motions/Motions_Idle_0_File_0.json" },
+            { "file": "motions/Motions_Idle_1_File_0.json" }
+        ],
+        "flick_head": [
+            { "file": "motions/Motions_TapLian_0_File_0.json" }
+        ],
+        "tap_body": [
+            { "file": "motions/Motions_TapXiong_0_File_0.json" },
+            { "file": "motions/Motions_TapDuzi_0_File_0.json" }
+        ]
+    }
+}

@@ -564,7 +564,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 断点配置（像素值）
 		breakpoints: {
 			// 移动端断点：屏幕宽度小于768px
-			mobile: 768,
+			mobile: 668,
 			// 平板端断点：屏幕宽度小于1280px
 			tablet: 1280,
 			// 桌面端断点：屏幕宽度小于1280px
@@ -612,8 +612,8 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false, // 启用看板娘
-	models: ["/pio/models/pio/model.json"], // 默认模型路径
+	enable: true, // 启用看板娘
+	models: ["/pio/models/anzu/model.json"], // 默认模型路径
 	position: "left", // 默认位置在右侧
 	width: 280, // 默认宽度
 	height: 250, // 默认高度
@@ -626,7 +626,7 @@ export const pioConfig: import("./types/config").PioConfig = {
 			"Stop touching me!",
 			"HENTAI!",
 			"Don't bully me like that!",
-		], // 触摸提示
+		], // 触摸提示 
 		home: "Click here to go back to homepage!", // 首页提示
 		skin: ["Want to see my new outfit?", "The new outfit looks great~"], // 换装提示
 		close: "QWQ See you next time~", // 关闭提示

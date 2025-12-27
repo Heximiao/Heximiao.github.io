@@ -307,7 +307,21 @@ var Paul_Pio = function (prop) {
 		if (!(prop.hidden && tools.isMobile())) {
 			if (!noModel) {
 				action.welcome();
-				loadlive2d("pio", prop.model[0]);
+    	// 检查模型路径，如果是 model3.json 或包含 moc3，则调用新版加载器
+    	if (prop.model[0].includes("model3") || prop.model[0].includes("model.json")) {
+        if (typeof L2Dwidget !== "undefined") {
+            L2Dwidget.init({
+                "model": { "jsonPath": prop.model[0] },
+                "display": { "position": "left", "width": 280, "height": 500 },
+                "mobile": { "show": true },
+                "name": { "canvas": "pio" } // 强行挂载到 pio 这个 ID 上
+            });
+        } else {
+            console.error("L2Dwidget 未定义，请检查 Layout.astro 是否引入了脚本");
+        }
+    } else {
+        loadlive2d("pio", prop.model[0]); // 保留旧版兼容性
+    }
 			}
 
 			switch (prop.mode) {

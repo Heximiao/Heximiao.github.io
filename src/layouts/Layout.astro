@@ -180,7 +180,37 @@ if (siteConfig.font) {
 	class="bg-[var(--page-bg)] text-[14px] md:text-[16px]"
 	data-overlayscrollbars-initialize
 >
+	
+	
 	<head>
+	
+	<!-- <link rel="stylesheet" href="/pio/static/waifu.css">
+
+    <script is:inline src="/pio/static/live2dcubismcore.min.js"></script>
+
+    <script is:inline src="/pio/static/waifu-tips.js"></script>
+
+    <script is:inline>
+        // 建议放在 window.onload 里，确保前面的 js 全部加载完
+        window.addEventListener('load', () => {
+            if (typeof initWidget === "function") {
+                initWidget({
+                    waifuPath: "/pio/waifu-tips.json",
+                    cubism5Path: "/pio/static/live2dcubismcore.min.js",
+                    // 修正：cdnPath 这里，该项目通常会自动补全 model/ 和 .json
+                    // 如果你的路径是 /pio/models/anzu/model.json
+                    cdnPath: "/pio/models/anzu/", 
+                    tools: ["hitokoto", "switch-model", "photo", "info", "quit"],
+                    drag: true,
+                    logLevel: "info"
+                });
+            } else {
+                console.error("无法初始化看板娘：waifu-tips.js 未能加载成功");
+            }
+        });
+    </script> -->
+	
+	<script is:inline src="/pio/static/pio.js"></script>
 		<script is:inline>
         	window.BANNER_HEIGHT = 400; 
         	window.widgetManager = window.widgetManager || {
