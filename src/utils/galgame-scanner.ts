@@ -10,6 +10,7 @@ export async function scanGalgames() {
       id: id,
       data: post.frontmatter, // 对应 md 顶部的配置
       Content: post.Content,   // 渲染后的 HTML 组件
+      body: post.rawContent ? post.rawContent() : ""
     };
   });
 

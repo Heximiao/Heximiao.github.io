@@ -3,6 +3,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl, getPostUrl } from "@utils/url-utils";
 import { initPostIdMap } from "@utils/permalink-utils";
+import { scanGalgames } from "./galgame-scanner";
 
 // // Retrieve posts and sort them by publication date
 async function getRawSortedPosts() {
@@ -34,6 +35,22 @@ async function getRawSortedPosts() {
 		return dateA > dateB ? -1 : 1;
 	});
 	return sorted;
+}
+
+export async function getAllStatsPosts() {
+    const sorted = await getRawSortedPosts();
+    const galgames = await scanGalgames();
+
+    const galgameItems = galgames.map(g => ({
+        id: g.id,
+        body: g.body, // 供字数统计
+        data: {
+            ...g.data,
+            published: g.data.published ? new Date(g.data.published) : new Date(g.data.releaseDate),
+        }
+    }));
+
+    return [...sorted, ...galgameItems];
 }
 
 export async function getSortedPosts() {
