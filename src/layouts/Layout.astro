@@ -183,6 +183,10 @@ if (siteConfig.font) {
 	
 	
 	<head>
+		<script is:inline>
+      // 必须先定义这个变量，否则后续脚本会直接崩溃
+      window.BANNER_HEIGHT = 400; 
+    </script>
 	
 	<!-- <script is:inline src="/pio/static/pio.js"></script>
 		<script is:inline>
