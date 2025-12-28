@@ -301,44 +301,38 @@ var Paul_Pio = function (prop) {
 		},
 	};
 
-	// 运行
 	this.init = (noModel) => {
-		// 未隐藏 + 非手机版，出现操作功能
-		if (!(prop.hidden && tools.isMobile())) {
-			if (!noModel) {
-				action.welcome();
-    	// 检查模型路径，如果是 model3.json 或包含 moc3，则调用新版加载器
-    	if (prop.model[0].includes("model3") || prop.model[0].includes("model.json")) {
-        if (typeof L2Dwidget !== "undefined") {
-            L2Dwidget.init({
-                "model": { "jsonPath": prop.model[0] },
-                "display": { "position": "left", "width": 280, "height": 500 },
-                "mobile": { "show": true },
-                "name": { "canvas": "pio" } // 强行挂载到 pio 这个 ID 上
-            });
-        } else {
-            console.error("L2Dwidget 未定义，请检查 Layout.astro 是否引入了脚本");
-        }
-    } else {
-        loadlive2d("pio", prop.model[0]); // 保留旧版兼容性
-    }
-			}
+	// 未隐藏 + 非手机版，出现操作功能
+	if (!(prop.hidden && tools.isMobile())) {
+		if (!noModel) {
+			// 欢迎语
+			action.welcome();
 
-			switch (prop.mode) {
-				case "static":
-					begin.static();
-					break;
-				case "fixed":
-					begin.fixed();
-					break;
-				case "draggable":
-					begin.draggable();
-					break;
+			// ✅ 永远使用 Pio 原生加载方式
+			if (typeof loadlive2d !== "undefined") {
+				loadlive2d("pio", prop.model[0]);
+			} else {
+				console.error("loadlive2d 未定义，请检查是否引入 live2d.min.js");
 			}
-
-			prop.content.custom && action.custom();
 		}
-	};
+
+		// 初始化交互模式
+		switch (prop.mode) {
+			case "static":
+				begin.static();
+				break;
+			case "fixed":
+				begin.fixed();
+				break;
+			case "draggable":
+				begin.draggable();
+				break;
+		}
+
+		prop.content.custom && action.custom();
+	}
+};
+
 
 	// 隐藏状态
 	this.initHidden = () => {

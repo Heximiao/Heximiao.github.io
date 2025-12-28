@@ -98,7 +98,7 @@ onDestroy(() => {
 </script>
 
 {#if pioConfig.enable}
-  <div class={`pio-container ${pioConfig.position || 'right'}`} bind:this={pioContainer}>
+ 	<div class={`pio-container ${pioConfig.position || 'right'}`} bind:this={pioContainer}>
     <div class="pio-action"></div>
     <canvas 
       id="pio" 
