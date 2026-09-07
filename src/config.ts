@@ -612,11 +612,11 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false, // 启用看板娘
+	enable: true, // 启用看板娘
 	models: ["/pio/models/model/anzu/index.json"], // Cubism 3+ 模型，使用第一项
 	position: "left", // 默认位置在左侧
-	width: 280, // 默认宽度
-	height: 250, // 默认高度
+	width: 392, // 默认宽度
+	height: 350, // 默认高度
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {

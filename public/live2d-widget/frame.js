@@ -5,7 +5,7 @@ import { AppDelegate } from "./chunk/index2.js";
 document.documentElement.dataset.live2dInstance = crypto.randomUUID();
 
 class Companion extends AppDelegate {
-  // Idle animation only. The vendor's document-wide mouse handlers access
+  // The vendor's document-wide mouse handlers access
   // models before asynchronous loading completes and must not be installed.
   initializeEventListener() {}
   releaseEventListener() {}
@@ -14,6 +14,20 @@ class Companion extends AppDelegate {
 let app;
 let running = false;
 let failed = false;
+
+// Use only the renderer's guarded drag API: hover/tap APIs require loaded assets.
+// The parent normalizes viewport coordinates and coalesces updates per frame.
+window.addEventListener("message", event => {
+  if (event.origin !== location.origin || event.source !== window.parent) return;
+  const data = event.data;
+  if (data?.type !== "mizuki-companion:gaze" || failed || !app) return;
+  if (!Number.isFinite(data.x) || !Number.isFinite(data.y)) return;
+  // Horizontal gaze follows screen X; retain the model's inverted vertical axis.
+  app.subdelegates.at(0)?.getLive2DManager().onDrag(
+    Math.max(-1, Math.min(1, data.x)),
+    -Math.max(-1, Math.min(1, data.y)),
+  );
+});
 
 function stop() {
   app?.stop();
