@@ -170,12 +170,12 @@ const allIcons = skillsData.map((skill) => skill.icon).filter(Boolean);
                       {skill.description}
                     </p>
                     <div class="mb-3">
-                      <div class="flex justify-between text-sm mb-1">
+                      {skill.experience && <div class="flex justify-between text-sm mb-1">
                         <span class="text-black/60 dark:text-white/60">{i18n(I18nKey.skillExperience)}</span>
                         <span class="text-black/80 dark:text-white/80">
                           {skill.experience.years} {i18n(I18nKey.skillYears)}{skill.experience.months > 0 ? ` ${skill.experience.months} ${i18n(I18nKey.skillMonths)}` : ''}
                         </span>
-                      </div>
+                      </div>}
                       <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                         <div 
                             class="h-2 rounded-full transition-all duration-300"
@@ -246,11 +246,11 @@ const allIcons = skillsData.map((skill) => skill.icon).filter(Boolean);
                         <p class="text-black/60 dark:text-white/60 mb-2 text-sm line-clamp-2">
                           {skill.description}
                         </p>
-                        <div class="text-xs text-black/60 dark:text-white/60">
+                        {skill.experience && <div class="text-xs text-black/60 dark:text-white/60">
                           <span>
                             {skill.experience.years} {i18n(I18nKey.skillYears)}{skill.experience.months > 0 ? ` ${skill.experience.months} ${i18n(I18nKey.skillMonths)}` : ''}
                           </span>
-                        </div>
+                        </div>}
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
                           <div 
                               class="h-2 rounded-full transition-all duration-300"

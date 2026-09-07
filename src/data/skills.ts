@@ -8,7 +8,7 @@ export interface Skill {
 	icon: string; // Iconify icon name
 	category: "frontend" | "backend" | "database" | "tools" | "other";
 	level: "beginner" | "intermediate" | "advanced" | "expert";
-	experience: {
+	experience?: {
 		years: number;
 		months: number;
 	};
@@ -23,7 +23,7 @@ export const skillsData: Skill[] = [
         id: "stm32",
         name: "STM32 / ARM",
         description:
-            "深入理解 ARM Cortex-M 架构，熟练使用标准库及 HAL 库进行外设驱动开发，包括 UART, I2C, SPI, PWM 等。",
+            "熟悉 STM32 单片机开发，能够使用标准库及 HAL 库配置常用外设，并在机创赛中实践嵌入式控制与电机驱动。",
         icon: "simple-icons:stmicroelectronics", // 意法半导体图标
         category: "backend",
         level: "advanced",
@@ -32,10 +32,20 @@ export const skillsData: Skill[] = [
         color: "#03234B",
     },
     {
+        id: "mspm0g3507",
+        name: "TI MSPM0G3507",
+        description:
+            "具备 TI MSPM0G3507 单片机开发能力，结合电赛备赛进行 C 语言程序编写、基础外设实验与板级调试。",
+        icon: "material-symbols:memory",
+        category: "backend",
+        level: "intermediate",
+        color: "#CC0000",
+    },
+    {
         id: "embedded-c",
         name: "Embedded C",
         description:
-            "熟悉底层 C 语言开发，熟悉寄存器操作、内存映射的基本原理。参加过ACM校赛",
+            "熟悉嵌入式 C 语言编程、寄存器操作与内存映射基础，能够结合单片机实验编写和调试控制程序，参加过 ACM 校赛。",
         icon: "logos:c",
         category: "backend",
         level: "advanced",
@@ -57,15 +67,26 @@ export const skillsData: Skill[] = [
     // 软件与算法 (Backend/Tools)
     {
         id: "python",
-        name: "Python / Bot",
+        name: "Python / AstrBot",
         description:
-            "熟练应用异步编程处理并发，熟悉 Nonebot2 框架。在 maibot 与 Astrbot 项目中有丰富的插件架构与 API 对接经验。",
+            "持续开发 AstrBot 与 maibot 插件，熟悉异步消息处理、指令与事件响应、配置管理及 API 对接，实践群聊互动和角色养成功能。",
         icon: "logos:python",
         category: "backend",
         level: "advanced",
         experience: { years: 1, months: 10 },
-        projects: ["acpoke_plugin", "maibot-plugins"],
+        projects: ["astrbot-plugin-wifepicker", "astrbot-plugin-atrifeed", "maibot-plugin-repo"],
         color: "#3776AB",
+    },
+    {
+        id: "sqlite",
+        name: "SQLite / 数据存储",
+        description:
+            "在亚托莉陪伴插件中使用 SQLite 保存用户好感度、金币、背包与剧情进度，具备基础的数据表设计和增删改查实践。",
+        icon: "material-symbols:database",
+        category: "database",
+        level: "intermediate",
+        projects: ["astrbot-plugin-atrifeed"],
+        color: "#0F80CC",
     },
 
     // 效率工具 (Tools)
@@ -73,7 +94,7 @@ export const skillsData: Skill[] = [
         id: "linux",
         name: "Linux / Shell",
         description:
-            "熟悉 Linux 开发环境，能够进行交叉编译环境搭建及服务器自动化部署。",
+            "熟悉 Linux 常用命令与开发环境，能够完成机器人运行环境配置、依赖安装和日常日志排查。",
         icon: "logos:linux-tux",
         category: "tools",
         level: "intermediate",
@@ -84,7 +105,7 @@ export const skillsData: Skill[] = [
         id: "git",
         name: "Git / GitHub",
         description:
-            "熟练使用 Git 进行版本管理，习惯于开源社区协作，能够配置 GitHub Actions 自动化工作流。",
+            "使用 Git 与 GitHub 管理插件代码，维护 README 和版本更新记录，并通过 Issue 与 Pull Request 参与开源交流和协作。",
         icon: "logos:git-icon",
         category: "tools",
         level: "intermediate",
@@ -144,7 +165,7 @@ export const getAdvancedSkills = () => {
 // Calculate total years of experience
 export const getTotalExperience = () => {
 	const totalMonths = skillsData.reduce((total, skill) => {
-		return total + skill.experience.years * 12 + skill.experience.months;
+		return total + (skill.experience ? skill.experience.years * 12 + skill.experience.months : 0);
 	}, 0);
 	return {
 		years: Math.floor(totalMonths / 12),

@@ -70,7 +70,7 @@ const getTypeIcon = (type: string) => {
 // 格式化日期
 const formatDate = (dateString: string) => {
 	const date = new Date(dateString);
-	return date.toLocaleDateString("zh-CN", { year: "numeric", month: "long" });
+	return date.toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" });
 };
 
 // 计算持续时间
@@ -296,7 +296,12 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
                       
                       <div class="flex items-center justify-between text-xs text-black/60 dark:text-white/60 mt-2">
                         <div>
-                          {getDuration(item.startDate, item.endDate)}
+                          {item.endDate
+                            ? i18n(I18nKey.projectsCompleted)
+                            : i18n(I18nKey.projectsInProgress)}
+                          {item.startDate !== item.endDate && (
+                            <span> · {getDuration(item.startDate, item.endDate)}</span>
+                          )}
                         </div>
                         {item.location && (
                           <div class="flex items-center">

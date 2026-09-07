@@ -20,21 +20,36 @@ export interface Project {
 
 export const projectsData: Project[] = [
 	{
-		id: "maibot_plugin",
-		title: "maibot plugin",
+		id: "astrbot-plugin-wifepicker",
+		title: "AstrBot 活跃成员抽老婆插件",
 		description:
-			"为麦麦bot开发的插件，提供多种实用功能以增强用户体验。",
-		image: "https://opengraph.githubassets.com/1/Heximiao/acpoke_plugin",
-		category: "web",
-		techStack: ["Python", "Nonebot2"],
-		status: "completed",
-		liveDemo: "https://github.com/Heximiao/acpoke_plugin",
-		sourceCode: "https://github.com/Heximiao/acpoke_plugin", // 更改为GitHub链接
-		visitUrl: "https://github.com/Heximiao/acpoke_plugin", // 添加前往项目链接
-		startDate: "2025-07-01",
-		endDate: "2025-12-01",
+			"基于 AstrBot 的群聊互动插件，从近期发言的活跃群友中抽取今日老婆，并生成群成员羁绊关系图谱。",
+		image: "https://opengraph.githubassets.com/1/Heximiao/astrbot-plugin-wifepicker",
+		category: "other",
+		techStack: ["Python", "AstrBot"],
+		status: "in-progress",
+		liveDemo: "https://github.com/Heximiao/astrbot-plugin-wifepicker",
+		sourceCode: "https://github.com/Heximiao/astrbot-plugin-wifepicker",
+		visitUrl: "https://github.com/Heximiao/astrbot-plugin-wifepicker",
+		startDate: "2026-02-09",
 		featured: true,
-		tags: ["Nonebot2", "A-SOUL", "Plugin"],
+		tags: ["AstrBot", "群聊互动", "Plugin"],
+	},
+	{
+		id: "astrbot-plugin-atrifeed",
+		title: "AstrBot 亚托莉陪伴插件",
+		description:
+			"基于 AstrBot 框架开发的亚托莉陪伴插件，为聊天机器人增添角色陪伴体验。",
+		image: "https://opengraph.githubassets.com/1/Heximiao/astrbot_plugin_atrifeed",
+		category: "other",
+		techStack: ["Python", "AstrBot"],
+		status: "in-progress",
+		liveDemo: "https://github.com/Heximiao/astrbot_plugin_atrifeed",
+		sourceCode: "https://github.com/Heximiao/astrbot_plugin_atrifeed",
+		visitUrl: "https://github.com/Heximiao/astrbot_plugin_atrifeed",
+		startDate: "2026-02-09",
+		featured: true,
+		tags: ["AstrBot", "ATRI", "Plugin"],
 	},
 	{
         id: "astrbot-analysis",

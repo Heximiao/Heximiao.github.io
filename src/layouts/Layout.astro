@@ -188,14 +188,6 @@ if (siteConfig.font) {
       window.BANNER_HEIGHT = 400; 
     </script>
 	
-	<!-- <script is:inline src="/pio/static/pio.js"></script>
-		<script is:inline>
-        	window.BANNER_HEIGHT = 400; 
-        	window.widgetManager = window.widgetManager || {
-            	getBreakpoints: () => ({ mobile: 768, tablet: 1024 }),
-            	shouldShowSidebar: () => true
-        	};
-    	</script>-->
 		
 		<!-- 第三方分析脚本 - 延迟加载优化 -->
 		<script is:inline>
@@ -355,12 +347,6 @@ if (siteConfig.font) {
 
 		<slot name="head" />
 
-		<!-- Pio 看板娘样式 - 仅在启用时加载 -->
-		{
-			pioConfig.enable && (
-				<link rel="stylesheet" href="/pio/static/pio.css" />
-			)
-		}
 
 		<link
 			rel="alternate"
@@ -396,15 +382,14 @@ if (siteConfig.font) {
 		<!-- Music Player - 仅在启用时加载 -->
 		{musicPlayerConfig.enable && <MusicPlayer client:idle />}
 
-		<!-- Pio 看板娘组件 - 仅在启用时加载 -->
-		<!--{pioConfig.enable && <Pio client:idle />}-->
+		<!-- Keep the companion outside Swup's <main> replacement boundary. -->
+		{pioConfig.enable && <Pio client:idle />}
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	
 		<script is:inline src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- <script is:inline src="/live2d-widget/autoload.js"></script>-->
 
 	</body>
 </html>

@@ -25,6 +25,42 @@ export interface TimelineItem {
 
 export const timelineData: TimelineItem[] = [
     {
+        id: "astrbot-plugin-dev",
+        title: "AstrBot 插件开发",
+        description:
+            "持续开发与维护 AstrBot 插件，包括活跃成员抽老婆插件和亚托莉陪伴插件。",
+        type: "project",
+        startDate: "2026-02-09",
+        skills: ["Python", "AstrBot", "插件开发"],
+        links: [
+            {
+                name: "活跃成员抽老婆插件",
+                url: "https://github.com/Heximiao/astrbot-plugin-wifepicker",
+                type: "project",
+            },
+            {
+                name: "亚托莉陪伴插件",
+                url: "https://github.com/Heximiao/astrbot_plugin_atrifeed",
+                type: "project",
+            },
+        ],
+        icon: "material-symbols:smart-toy",
+        color: "#7C3AED",
+        featured: true,
+    },
+    {
+        id: "electronics-contest-2026",
+        title: "电赛省一等奖",
+        description: "在电子设计竞赛中获得省级一等奖。",
+        type: "achievement",
+        startDate: "2026-08-05",
+        endDate: "2026-08-05",
+        achievements: ["省级一等奖"],
+        icon: "material-symbols:emoji-events",
+        color: "#D97706",
+        featured: true,
+    },
+    {
         id: "current-study",
         title: "电子信息工程 - 本科在读",
         description:
@@ -66,13 +102,15 @@ export const timelineData: TimelineItem[] = [
         id: "robot-contest-2024",
         title: "全国大学生机械创新大赛 (机创赛)",
         description:
-            "参与“仿生蝴蝶”赛道，负责仿生结构的嵌入式控制系统开发，实现高精度动作模拟。",
+            "参与“仿生蝴蝶”赛道，负责仿生结构的嵌入式控制系统开发，实现高精度动作模拟，项目已完成并获得省一等奖。",
         type: "project",
         startDate: "2025-11-01",
+        endDate: "2026-04-26",
         organization: "机创赛项目组",
         position: "控制算法/嵌入式开发",
         skills: ["STM32", "电机控制", "仿生算法"],
         achievements: [
+            "获得省一等奖",
             "自主设计基于 STM32 的蝴蝶翅膀振动控制逻辑",
             "解决轻量化结构下的电源管理难题"
         ],

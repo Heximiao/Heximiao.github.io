@@ -1,114 +1,66 @@
-<script>
-import { onDestroy, onMount } from "svelte";
-import { pioConfig } from "@/config";
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { pioConfig } from "@/config";
 
-// 将配置转换为 Pio 插件需要的格式
-const pioOptions = {
-	mode: pioConfig.mode,
-	hidden: pioConfig.hiddenOnMobile,
-	content: pioConfig.dialog || {},
-	model: pioConfig.models || ["/pio/models/pio/model.json"],
-};
+  let visible = false;
+  let closed = false;
+  let offsetX = 0;
+  let offsetY = 0;
+  let drag: { x: number; y: number; offsetX: number; offsetY: number } | null = null;
+  const source = `/live2d-widget/frame.html?model=${encodeURIComponent(pioConfig.models[0])}`;
 
-// 全局Pio实例引用
-let pioInstance = null;
-let pioInitialized = false;
-let pioContainer;
-let pioCanvas;
+  onMount(() => {
+    const media = window.matchMedia("(max-width: 1280px)");
+    const update = () => {
+      visible = pioConfig.enable && !(pioConfig.hiddenOnMobile && media.matches);
+      offsetX = 0;
+      offsetY = 0;
+    };
+    update();
+    media.addEventListener("change", update);
+    // Unmounting the iframe releases its animation, timers and WebGL context.
+    return () => media.removeEventListener("change", update);
+  });
 
-// 样式已通过 Layout.astro 静态引入，无需动态加载
+  function startDrag(event: PointerEvent) {
+    if (pioConfig.mode !== "draggable") return;
+    drag = { x: event.clientX, y: event.clientY, offsetX, offsetY };
+    (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
+  }
 
-// 等待 DOM 加载完成后再初始化 Pio
-function initPio() {
-	if (typeof window !== "undefined" && typeof Paul_Pio !== "undefined") {
-		try {
-			// 确保DOM元素存在
-			if (pioContainer && pioCanvas && !pioInitialized) {
-				pioInstance = new Paul_Pio(pioOptions);
-				pioInitialized = true;
-				console.log("Pio initialized successfully (Svelte)");
-			} else if (!pioContainer || !pioCanvas) {
-				console.warn("Pio DOM elements not found, retrying...");
-				setTimeout(initPio, 100);
-			}
-		} catch (e) {
-			console.error("Pio initialization error:", e);
-		}
-	} else {
-		// 如果 Paul_Pio 还未定义，稍后再试
-		setTimeout(initPio, 100);
-	}
-}
-
-// 样式已通过 Layout.astro 静态引入，无需动态加载函数
-
-// 加载必要的脚本
-function loadPioAssets() {
-	if (typeof window === "undefined") return;
-
-	// 样式已通过 Layout.astro 静态引入
-
-	// 加载JS脚本
-	const loadScript = (src, id) => {
-		return new Promise((resolve, reject) => {
-			if (document.querySelector(`#${id}`)) {
-				resolve();
-				return;
-			}
-			const script = document.createElement("script");
-			script.id = id;
-			script.src = src;
-			script.onload = resolve;
-			script.onerror = reject;
-			document.head.appendChild(script);
-		});
-	};
-
-	// 按顺序加载脚本
-	loadScript("/pio/static/l2d.js", "pio-l2d-script")
-		.then(() => loadScript("/pio/static/pio.js", "pio-main-script"))
-		.then(() => {
-			// 脚本加载完成后初始化
-			setTimeout(initPio, 100);
-		})
-		.catch((error) => {
-			console.error("Failed to load Pio scripts:", error);
-		});
-}
-
-// 样式已通过 Layout.astro 静态引入，无需页面切换监听
-
-onMount(() => {
-	if (!pioConfig.enable) return;
-
-	// 如果配置了手机端隐藏，且当前屏幕宽度小于 1280px (平板/手机)，则直接终止，不加载脚本
-    if (pioConfig.hiddenOnMobile && window.matchMedia("(max-width: 1280px)").matches) {
-        return;
-    }
-
-	// 加载资源并初始化
-	loadPioAssets();
-});
-
-onDestroy(() => {
-	// Svelte 组件销毁时不需要清理 Pio 实例
-	// 因为我们希望它在页面切换时保持状态
-	console.log("Pio Svelte component destroyed (keeping instance alive)");
-});
+  function moveDrag(event: PointerEvent) {
+    if (!drag) return;
+    offsetX = drag.offsetX + event.clientX - drag.x;
+    offsetY = drag.offsetY + event.clientY - drag.y;
+  }
 </script>
 
-{#if pioConfig.enable}
- 	<div class={`pio-container ${pioConfig.position || 'right'}`} bind:this={pioContainer}>
-    <div class="pio-action"></div>
-    <canvas 
-      id="pio" 
-      bind:this={pioCanvas}
-      width={pioConfig.width || 280} 
-      height={pioConfig.height || 250}
-    ></canvas>
-  </div>
+{#if visible}
+  <aside class="live2d-companion" class:right={pioConfig.position === "right"}
+    style:transform={`translate(${offsetX}px, ${offsetY}px)`} aria-label="看板娘">
+    {#if closed}
+      <button onclick={() => closed = false}>显示看板娘</button>
+    {:else}
+      <div class="controls">
+        {#if pioConfig.mode === "draggable"}
+          <button class="drag-handle" aria-label="拖动看板娘" title="拖动调整位置"
+            onpointerdown={startDrag} onpointermove={moveDrag}
+            onpointerup={() => drag = null} onpointercancel={() => drag = null}>✥</button>
+        {/if}
+        <button aria-label="隐藏看板娘" title="隐藏看板娘" onclick={() => closed = true}>×</button>
+      </div>
+      <iframe title="Live2D 看板娘" src={source}
+        width={pioConfig.width || 280} height={pioConfig.height || 250}></iframe>
+    {/if}
+  </aside>
 {/if}
 
 <style>
-  /* Pio 相关样式将通过外部CSS文件加载 */
+  .live2d-companion { position: fixed; left: 12px; bottom: 12px; z-index: 40; }
+  .live2d-companion.right { left: auto; right: 12px; }
+  iframe { display: block; border: 0; background: transparent; max-width: calc(100vw - 24px); }
+  .controls { display: flex; justify-content: flex-end; gap: 6px; }
+  button { border-radius: 12px; padding: 4px 10px; background: var(--card-bg, #fff); color: var(--primary, #555); box-shadow: 0 1px 6px #0002; }
+  .drag-handle { touch-action: none; cursor: grab; }
+  .drag-handle:active { cursor: grabbing; }
 </style>

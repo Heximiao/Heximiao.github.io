@@ -180,6 +180,9 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		// Keep client hydration and compiled components on the same Svelte runtime.
+		resolve: { dedupe: ["svelte"] },
+		cacheDir: "node_modules/.vite-mizuki",
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {
