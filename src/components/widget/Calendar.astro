@@ -3,6 +3,7 @@ import { siteConfig } from "../../config";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import { getSortedPosts } from "../../utils/content-utils";
+import { scanGalgames } from "../../utils/galgame-scanner";
 import WidgetLayout from "./WidgetLayout.astro";
 
 interface Props {
@@ -14,25 +15,46 @@ const { class: className, style } = Astro.props;
 
 // 获取所有文章
 const posts = await getSortedPosts();
+const galgames = await scanGalgames();
+
+// Galgame 中只有显式填写 published 的文章才进入日历。
+const calendarPosts = [
+	...posts.map((post) => ({
+		id: post.id,
+		title: post.data.title,
+		published: post.data.published,
+		url: `/posts/${post.id}/`,
+	})),
+	...galgames
+		.filter((game) => game.data.published instanceof Date && !Number.isNaN(game.data.published.getTime()))
+		.map((game) => ({
+			id: game.id,
+			title: game.data.title,
+			published: game.data.published,
+			url: `/galgame/${game.id}/`,
+		})),
+];
 
 // 创建文章日期映射（格式：YYYY-MM-DD -> 文章列表）
-const postDateMap = new Map<string, { id: string; title: string; published: Date }[]>();
-posts.forEach((post) => {
-	const date = new Date(post.data.published);
+const postDateMap = new Map<string, { id: string; title: string; published: Date; url: string }[]>();
+calendarPosts.forEach((post) => {
+	const date = new Date(post.published);
 	const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 	const existingPosts = postDateMap.get(dateKey) || [];
 	postDateMap.set(dateKey, [...existingPosts, {
 		id: post.id,
-		title: post.data.title,
-		published: post.data.published
+		title: post.title,
+		published: post.published,
+		url: post.url,
 	}]);
 });
 
 // 序列化所有文章数据供客户端使用
-const allPostsData = posts.map((post) => ({
+const allPostsData = calendarPosts.map((post) => ({
 	id: post.id,
-	title: post.data.title,
-	published: post.data.published.toISOString(),
+	title: post.title,
+	published: post.published.toISOString(),
+	url: post.url,
 }));
 
 // 月份名称（使用 i18n）
@@ -179,7 +201,7 @@ const yearSuffix = isChinese ? "年" : " ";
     const divider = document.getElementById('calendar-posts-divider');
     if (postsList) {
       postsList.innerHTML = currentMonthPosts.map(post => `
-        <a href="/posts/${post.id}/" class="block text-sm text-black/90 dark:text-white/90 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors truncate px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
+        <a href="${post.url}" class="block text-sm text-black/90 dark:text-white/90 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors truncate px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
           ${post.title}
         </a>
       `).join('');
@@ -214,7 +236,7 @@ const yearSuffix = isChinese ? "年" : " ";
         const posts = postDateMap[dateKey] || [];
         if (posts.length > 0 && postsList) {
           postsList.innerHTML = posts.map(post => `
-            <a href="/posts/${post.id}/" class="block text-sm text-black/90 dark:text-white/90 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors truncate px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
+            <a href="${post.url}" class="block text-sm text-black/90 dark:text-white/90 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors truncate px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
               ${post.title}
             </a>
           `).join('');

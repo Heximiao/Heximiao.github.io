@@ -1,5 +1,6 @@
 ---
 title: "Summer Pockets"
+published: 2025-12-24
 developer: "Key"
 releaseDate: 2020-07-20
 cover: "/images/galgame_picture/summer_pockets_package_image.webp"

@@ -1,5 +1,6 @@
 ---
 title: "五彩斑斓的世界 玩后感"
+published: 2025-12-24
 developer: "Favorite"
 releaseDate: 2025-09-01
 cover: "/images/galgame_picture/Irotoridori_no_Sekai.jpg"

@@ -1,5 +1,6 @@
 ---
 title: "奇异恩典 -What color is your attribute?"
+published: 2025-12-24
 developer: "Cabbage Soft"
 releaseDate: 2025-05-01
 cover: "/images/galgame_picture/Amazing_grace_what_color_is_your_attribute_cover.jpg"

@@ -1,5 +1,6 @@
 ---
 title: "9-nine- 系列玩后感"
+published: 2025-12-24
 developer: "Palette"
 releaseDate: 2025-09-04
 cover: "/images/galgame_picture/9-Nine_game_cover.jpg"

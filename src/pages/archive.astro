@@ -4,17 +4,35 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPostsList } from "@utils/content-utils";
+import { scanGalgames } from "@utils/galgame-scanner";
 
 const sortedPostsList = await getSortedPostsList();
+const galgames = await scanGalgames();
+
+const datedGalgamePosts = galgames
+    .filter((game) => game.data.published instanceof Date && !Number.isNaN(game.data.published.getTime()))
+    .map((game) => ({
+        id: game.id,
+        url: `/galgame/${game.id}/`,
+        data: {
+            title: game.data.title,
+            tags: Array.isArray(game.data.tags) ? game.data.tags : [],
+            category: "Galgame",
+            published: game.data.published,
+        },
+    }));
 
 // 1. 修复类型兼容性：将 category 的 null 转换为 undefined
-const posts = sortedPostsList.map((post) => ({
-    ...post,
-    data: {
-        ...post.data,
-        category: post.data.category === null ? undefined : post.data.category,
-    },
-}));
+const posts = [
+    ...sortedPostsList.map((post) => ({
+        ...post,
+        data: {
+            ...post.data,
+            category: post.data.category === null ? undefined : post.data.category,
+        },
+    })),
+    ...datedGalgamePosts,
+];
 
 // 2. 提取所有标签 (去重)
 const tags = [...new Set(posts.flatMap(post => post.data.tags))];

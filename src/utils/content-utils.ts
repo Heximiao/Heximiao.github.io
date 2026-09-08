@@ -1,7 +1,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
-import { getCategoryUrl, getPostUrl } from "@utils/url-utils";
+import { getCategoryUrl, getPostUrl, url } from "@utils/url-utils";
 import { initPostIdMap } from "@utils/permalink-utils";
 import { scanGalgames } from "./galgame-scanner";
 
@@ -123,6 +123,7 @@ export async function getCategoryList(): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
+	const galgames = await scanGalgames();
 	const count: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
 		if (!post.data.category) {
@@ -139,6 +140,10 @@ export async function getCategoryList(): Promise<Category[]> {
 		count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
 	});
 
+	// Galgame 使用独立内容目录，将其中的全部文章作为一个分类展示。
+	const galgameCategory = "Galgame";
+	count[galgameCategory] = (count[galgameCategory] || 0) + galgames.length;
+
 	const lst = Object.keys(count).sort((a, b) => {
 		return a.toLowerCase().localeCompare(b.toLowerCase());
 	});
@@ -148,7 +153,7 @@ export async function getCategoryList(): Promise<Category[]> {
 		ret.push({
 			name: c,
 			count: count[c],
-			url: getCategoryUrl(c),
+			url: c === galgameCategory ? url("/galgame/") : getCategoryUrl(c),
 		});
 	}
 	return ret;
