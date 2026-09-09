@@ -128,7 +128,7 @@ const positionClass = getPositionClass(position);
 					// 对于本地图片，使用img标签而不是Image组件
 					return (
 						<img
-							src={src}
+							data-src={src}
 							alt={`Desktop wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
@@ -138,7 +138,7 @@ const positionClass = getPositionClass(position);
 				} else {
 					return (
 						<img
-							src={src}
+							data-src={src}
 							alt={`Desktop wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
@@ -161,7 +161,7 @@ const positionClass = getPositionClass(position);
 					// 对于本地图片，使用img标签而不是Image组件
 					return (
 						<img
-							src={src}
+							data-src={src}
 							alt={`Mobile wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
@@ -171,7 +171,7 @@ const positionClass = getPositionClass(position);
 				} else {
 					return (
 						<img
-							src={src}
+							data-src={src}
 							alt={`Mobile wallpaper ${index + 1}`}
 							class={imageClass}
 							data-carousel-item={isCarouselEnabled ? index : undefined}
@@ -186,51 +186,46 @@ const positionClass = getPositionClass(position);
 
 {isCarouselEnabled && (
 	<script is:inline define:vars={{ carouselInterval }}>
-		// 全屏壁纸轮播逻辑
+		// Only request wallpaper files after the user enables fullscreen mode.
 		function initFullscreenWallpaperCarousel() {
 			const wallpaperContainer = document.querySelector('[data-fullscreen-wallpaper]');
-			if (!wallpaperContainer) return;
+			if (!wallpaperContainer || wallpaperContainer.dataset.initialized === 'true') return;
+			wallpaperContainer.dataset.initialized = 'true';
 
 			const desktopItems = wallpaperContainer.querySelectorAll('.hidden.lg\\:block [data-carousel-item]');
 			const mobileItems = wallpaperContainer.querySelectorAll('.block.lg\\:hidden [data-carousel-item]');
 
-			function startCarousel(items) {
-				if (items.length <= 1) return;
+			function loadImage(image) {
+				if (!image.getAttribute('src') && image.dataset.src) image.src = image.dataset.src;
+			}
 
+			function startCarousel(items) {
+				if (items.length === 0) return;
 				let currentIndex = 0;
-				
-				// 初始化：显示第一张，隐藏其他
+				loadImage(items[0]);
 				items.forEach((item, index) => {
 					item.style.opacity = index === 0 ? '1' : '0';
 				});
+				if (items.length === 1) return;
 
-				// 开始轮播
 				setInterval(() => {
-					// 隐藏当前图片
 					items[currentIndex].style.opacity = '0';
-					
-					// 切换到下一张
 					currentIndex = (currentIndex + 1) % items.length;
-					
-					// 显示下一张图片
+					loadImage(items[currentIndex]);
 					items[currentIndex].style.opacity = '1';
 				}, carouselInterval * 1000);
 			}
 
-			// 分别为桌面端和移动端启动轮播
-			if (desktopItems.length > 0) {
-				startCarousel(desktopItems);
-			}
-			if (mobileItems.length > 0) {
-				startCarousel(mobileItems);
+			startCarousel(window.matchMedia('(min-width: 1024px)').matches ? desktopItems : mobileItems);
+		}
+
+		function activateFullscreenWallpaper() {
+			if ((localStorage.getItem('wallpaperMode') || 'banner') === 'fullscreen') {
+				initFullscreenWallpaperCarousel();
 			}
 		}
 
-		// 页面加载完成后初始化轮播
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', initFullscreenWallpaperCarousel);
-		} else {
-			initFullscreenWallpaperCarousel();
-		}
+		activateFullscreenWallpaper();
+		window.addEventListener('wallpaper-mode-change', activateFullscreenWallpaper);
 	</script>
 )}

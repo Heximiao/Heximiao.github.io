@@ -574,6 +574,8 @@ const transparentClass = shouldEnableTransparency
                                     src={Array.isArray(bannerImages.mobile) ? bannerImages.mobile[index] : (typeof bannerImages.mobile === 'string' ? bannerImages.mobile : '')} 
                                     position={siteConfig.banner.position}
                                     loading={index === 0 ? "eager" : "lazy"}
+									decoding="async"
+									fetchpriority={index === 0 ? "high" : "low"}
                                 />
                             )}
                             <!-- Desktop: use desktop-specific images -->
@@ -584,6 +586,8 @@ const transparentClass = shouldEnableTransparency
                                     src={Array.isArray(bannerImages.desktop) ? bannerImages.desktop[index] : (typeof bannerImages.desktop === 'string' ? bannerImages.desktop : '')} 
                                     position={siteConfig.banner.position}
                                     loading={index === 0 ? "eager" : "lazy"}
+									decoding="async"
+									fetchpriority={index === 0 ? "high" : "low"}
                                 />
                             )}
                         </li>
