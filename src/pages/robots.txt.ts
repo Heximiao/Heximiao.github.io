@@ -1,14 +1,14 @@
 import type { APIRoute } from "astro";
 
 const robotsTxt = `
-# Public pages and blog posts may be indexed, including by AI crawlers.
-# Keep albums and their original image files out of crawler indexes.
+# Only blog posts, Galgame pages, and their required static assets may be crawled.
 User-agent: *
-Allow: /
-Disallow: /albums/
-Disallow: /images/albums/
+Allow: /posts/
+Allow: /galgame/
+Allow: /_astro/
+Disallow: /
 
-# Anthropic crawler identities documented by Anthropic.
+# Block Anthropic's Claude crawlers from the entire site.
 User-agent: ClaudeBot
 Disallow: /
 

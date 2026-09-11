@@ -48,15 +48,13 @@ function formatNumber(num: number): string {
 	return num.toLocaleString();
 }
 
-// 获取最新文章日期（忽略置顶状态，只按发布日期排序）
-const latestPost = posts.reduce((latest, post) => {
-	if (!latest) return post;
-	return post.data.published > latest.data.published ? post : latest;
-}, posts[0]);
+// 获取最近一次文章活动时间：优先使用编辑时间，未填写时回退到发布时间
+const lastActivityDate = posts.reduce<Date | null>((latest, post) => {
+	const activityDate = new Date(post.data.updated ?? post.data.published);
+	return !latest || activityDate > latest ? activityDate : latest;
+}, null);
 
-const lastPostDate = latestPost
-	? latestPost.data.published.toISOString()
-	: null;
+const lastActivityDateIso = lastActivityDate?.toISOString() ?? null;
 
 const stats = [
 	{
@@ -129,7 +127,7 @@ const stats = [
   </div>
 </WidgetLayout>
 
-<script is:inline define:vars={{ siteStartDate, lastPostDate }}>
+<script is:inline define:vars={{ siteStartDate, lastActivityDateIso }}>
   function updateDynamicStats() {
     const today = new Date();
     
@@ -144,10 +142,10 @@ const stats = [
     }
     
     // 更新最后活动时间
-    if (lastPostDate) {
-      const lastPost = new Date(lastPostDate);
-      const timeSinceLastPost = Math.abs(today.getTime() - lastPost.getTime());
-      const daysSinceLastUpdate = Math.floor(timeSinceLastPost / (1000 * 60 * 60 * 24));
+    if (lastActivityDateIso) {
+      const lastActivity = new Date(lastActivityDateIso);
+      const timeSinceLastActivity = Math.abs(today.getTime() - lastActivity.getTime());
+      const daysSinceLastUpdate = Math.floor(timeSinceLastActivity / (1000 * 60 * 60 * 24));
       
       const lastUpdateElement = document.querySelector('[data-stat-id="last-update"]');
       if (lastUpdateElement) {

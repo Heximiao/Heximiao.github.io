@@ -125,7 +125,10 @@ export default defineConfig({
 		}),
 		svelte(),
 		sitemap({
-			filter: (page) => !new URL(page).pathname.startsWith("/albums/"),
+			filter: (page) => {
+				const pathname = new URL(page).pathname;
+				return pathname.startsWith("/posts/") || pathname.startsWith("/galgame/");
+			},
 		}),
 	],
 	markdown: {
