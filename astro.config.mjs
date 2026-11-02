@@ -187,7 +187,15 @@ export default defineConfig({
 	vite: {
 		// Keep client hydration and compiled components on the same Svelte runtime.
 		resolve: { dedupe: ["svelte"] },
-		cacheDir: "node_modules/.vite-mizuki",
+		plugins: [
+			{
+				name: "mizuki-separate-dependency-caches",
+				config(_config, { command }) {
+					// Avoid replacing a running dev server's optimized dependencies during a build.
+					return { cacheDir: `node_modules/.vite-mizuki-${command}` };
+				},
+			},
+		],
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {

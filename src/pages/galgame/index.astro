@@ -3,7 +3,10 @@ import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import { scanGalgames } from "../../utils/galgame-scanner";
 import { Icon } from "astro-icon/components";
 
-const galgames = await scanGalgames();
+// 有评价正文的作品优先，同组保留扫描器按游玩日期排列的顺序。
+const galgames = (await scanGalgames()).sort(
+  (a, b) => Number(Boolean(b.body.trim())) - Number(Boolean(a.body.trim())),
+);
 
 const statusConfig: any = {
   completed: { label: "已通关", color: "text-green-500 bg-green-500/10" },
