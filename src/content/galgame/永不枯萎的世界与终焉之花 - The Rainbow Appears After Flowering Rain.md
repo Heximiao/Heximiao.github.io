@@ -4,10 +4,10 @@ published: 2026-11-02
 developer: "SWEET&TEA"
 releaseDate: 2026-11-02
 cover: "/images/galgame_picture/永不枯萎的世界与终焉之花.jpg"
-rating: 9.0
+rating: 9.6
 status: "completed"
 tags: ["催泪", "约定", "亲情", "恋爱", "SWEET&TEA"]
-description: "我们因为不完美，所以是人。"
+description: "因为约定，所以我们再次相遇"
 ---
 
 ## 游玩评价
@@ -28,4 +28,7 @@ description: "我们因为不完美，所以是人。"
 架起彩虹的桥  
 让光芒 在此刻绽放
 
-————永遠に咲く花
+————永遠に咲く花                                                                                                                            
+                                                                                          （写于2026.11.01）
+
+> 两个人的话，快乐会加倍而痛苦只会有一半哦   &nbsp;&nbsp;&nbsp;——春         

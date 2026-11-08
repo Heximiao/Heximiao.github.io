@@ -1,13 +1,13 @@
 ---
-title: "五彩斑斓的世界 玩后感"
+title: "五彩斑斓的世界"
 published: 2025-12-24
 developer: "Favorite"
 releaseDate: 2025-09-01
 cover: "/images/galgame_picture/Irotoridori_no_Sekai.jpg"
-rating: 9.0
+rating: 9.7
 status: "completed"
 tags: ["Favorite", "剧情作", "雪人", "真红"]
-description: "总的来说是一部非常优秀的剧情作，剧情作才好玩，天天白开水也没什么意思。"
+description: "世界尽头图书馆的秘密？"
 ---
 
 ## 游玩评价

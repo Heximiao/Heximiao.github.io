@@ -4,7 +4,7 @@ published: 2025-12-24
 developer: "Cabbage Soft"
 releaseDate: 2025-05-01
 cover: "/images/galgame_picture/Amazing_grace_what_color_is_your_attribute_cover.jpg"
-rating: 9.5
+rating: 9.6
 status: "completed"
 tags: ["时空轮回", "悬疑", "治愈"]
 description: "让人感觉美的，不仅仅是画本身，其背后的故事才是。"

@@ -4,7 +4,7 @@ published: 2025-12-24
 developer: "Key"
 releaseDate: 2020-07-20
 cover: "/images/galgame_picture/summer_pockets_package_image.webp"
-rating: 9.5
+rating: 9.8
 status: "completed"
 tags: ["岛阁", "治愈", "泣系"]
 description: "在那个暑假，我与少女们相遇了。"
