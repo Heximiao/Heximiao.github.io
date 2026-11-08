@@ -30,7 +30,12 @@ const Content = game.Content;
           <img src={game.data.cover} class="w-full rounded-lg shadow-lg border dark:border-neutral-800" />
         </div>
         <div class="flex-1">
-          <h1 class="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">{game.data.title}</h1>
+          <h1
+            data-pagefind-body
+            data-pagefind-weight="10"
+            data-pagefind-meta="title"
+            class="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4"
+          >{game.data.title}</h1>
           <div class="space-y-2 text-sm text-neutral-500 dark:text-neutral-400 font-medium">
             <p>制作商：<span class="text-neutral-800 dark:text-neutral-200">{game.data.developer}</span></p>
             <p>评分：<span class="text-yellow-500 font-bold text-lg">★ {game.data.rating}</span></p>
@@ -44,7 +49,7 @@ const Content = game.Content;
         </div>
       </header>
 
-      <article class="prose dark:prose-invert max-w-none border-t border-neutral-100 dark:border-neutral-800 pt-10">
+      <article data-pagefind-body class="prose dark:prose-invert max-w-none border-t border-neutral-100 dark:border-neutral-800 pt-10">
         <Content />
       </article>
 
